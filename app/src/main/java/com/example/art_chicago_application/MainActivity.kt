@@ -13,12 +13,17 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.art_chicago_application.Data.AppRepository
 import com.example.art_chicago_application.Models.Note
 import com.example.art_chicago_application.ui.theme.ART_CHICAGO_APPLICATIONTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val repository = AppRepository()
+        artViewModel = ArtViewModel(repository)
+
         setContent {
             ART_CHICAGO_APPLICATIONTheme {
                 // A surface container using the 'background' color from the theme
@@ -33,6 +38,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+var artViewModel: ArtViewModel? = null
 var listPage: Int = 1
 var buttonNote: Note? = null
 
