@@ -27,7 +27,6 @@ fun ArtCard(note: Note, modifier: Modifier = Modifier, onNavigateToInf: () -> Un
             ){
                 Text(
                     text = note.title!!,
-                    textAlign = TextAlign.Center,
                     fontSize = 25.sp,
                     color = Color.Black,
                 )

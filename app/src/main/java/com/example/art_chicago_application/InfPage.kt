@@ -22,31 +22,49 @@ fun InfPage(modifier: Modifier = Modifier, onNavigateToList: () -> Unit) {
                 NavBarTop(text = " Information", onNavigateToList = onNavigateToList, canGoBack = true)
             }
             item{
-                Text(
-                    " Title: " + imgInf.value!!.title,
-                    fontSize = 25.sp,
-                    modifier = Modifier.fillMaxWidth(),
-                    color = Color.Blue
-                )
+                if (imgInf.value!!.title != null){
+                    Text(
+                        " Title: " + imgInf.value!!.title,
+                        fontSize = 25.sp,
+                        modifier = Modifier.fillMaxWidth(),
+                        color = Color.Blue
+                    )
+                }
+            }
+            item{
+                Text("", fontSize = 5.sp )
             }
             item {
-                Text(
-                    text = " Author: " + imgInf.value!!.artistTitle,
-                    fontSize = 25.sp,
-                    modifier = Modifier.fillMaxWidth(),
-                    color = Color.Blue
-                )
+                if (imgInf.value!!.artistTitle != null){
+                    Text(
+                        text = " Author: " + imgInf.value!!.artistTitle,
+                        fontSize = 25.sp,
+                        modifier = Modifier.fillMaxWidth(),
+                        color = Color.Blue
+                    )
+                }
+            }
+            item{
+                Text("", fontSize = 5.sp )
             }
             item {
-                Text(
-                    text = " Origin: " + imgInf.value!!.placeOfOrigin,
-                    fontSize = 25.sp,
-                    modifier = Modifier.fillMaxWidth(),
-                    color = Color.Blue
-                )
+                if (imgInf.value!!.placeOfOrigin != null){
+                    Text(
+                        text = " Origin: " + imgInf.value!!.placeOfOrigin,
+                        fontSize = 25.sp,
+                        modifier = Modifier.fillMaxWidth(),
+                        color = Color.Blue
+                    )
+                }
+            }
+            item{
+                Text("", fontSize = 5.sp )
             }
             item{
                 ImgById(imgInf.value!!.imageId)
+            }
+            item{
+                Text("", fontSize = 5.sp )
             }
             item {
                 Button(
