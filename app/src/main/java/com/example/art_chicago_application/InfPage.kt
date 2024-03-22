@@ -11,13 +11,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
-import com.example.art_chicago_application.Models.ImgInf
 import com.example.art_chicago_application.NavBar.NavBarTop
 
 @Composable
 fun InfPage(modifier: Modifier = Modifier, onNavigateToList: () -> Unit) {
-    val imgInf = artViewModel!!.GetImgInf(buttonNote!!).observeAsState()
-    if (imgInf != null){
+    val imgInf = artViewModel!!.GetImgData(buttonNote!!).observeAsState()
+    if (imgInf.value != null){
         LazyColumn(modifier = modifier){
             item {
                 NavBarTop(text = " Information", onNavigateToList = onNavigateToList, canGoBack = true)
@@ -32,7 +31,7 @@ fun InfPage(modifier: Modifier = Modifier, onNavigateToList: () -> Unit) {
             }
             item {
                 Text(
-                    text = " Author: " + imgInf.value!!.author,
+                    text = " Author: " + imgInf.value!!.artistTitle,
                     fontSize = 25.sp,
                     modifier = Modifier.fillMaxWidth(),
                     color = Color.Blue
@@ -40,14 +39,14 @@ fun InfPage(modifier: Modifier = Modifier, onNavigateToList: () -> Unit) {
             }
             item {
                 Text(
-                    text = " Origin: " + imgInf.value!!.origin,
+                    text = " Origin: " + imgInf.value!!.placeOfOrigin,
                     fontSize = 25.sp,
                     modifier = Modifier.fillMaxWidth(),
                     color = Color.Blue
                 )
             }
             item{
-                ImgById(imgInf.value!!.image_id)
+                ImgById(imgInf.value!!.imageId)
             }
             item {
                 Button(

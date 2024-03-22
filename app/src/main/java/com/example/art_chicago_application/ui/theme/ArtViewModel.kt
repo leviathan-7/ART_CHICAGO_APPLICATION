@@ -1,24 +1,28 @@
 package com.example.art_chicago_application
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
-import androidx.lifecycle.switchMap
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.liveData
 import com.example.art_chicago_application.Data.AppRepository
-import com.example.art_chicago_application.Models.ImgInf
-import com.example.art_chicago_application.Models.Note
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.launch
+import com.example.art_chicago_application.POJO.ImgData
+import com.example.art_chicago_application.POJO.Note
 
 class ArtViewModel( private val appRepository: AppRepository) : ViewModel() {
-    fun GetNotesFromPage(pageNumber: Int): LiveData<List<Note>>{
-        return appRepository.getNotesFromPage(pageNumber).asLiveData()
+    fun GetNotesFromPage(pageNumber: Int): LiveData<List<Note>?>{
+        val lst: LiveData<List<Note>?> = liveData {
+            val data = appRepository.getNotesFromPage(pageNumber)
+            emit(data)
+        }
+
+        return lst
     }
-    fun GetImgInf(note: Note): LiveData<ImgInf>{
-        return appRepository.getImgInf(note).asLiveData()
+    fun GetImgData(note: Note): LiveData<ImgData?>{
+        val lst: LiveData<ImgData?> = liveData {
+            val data = appRepository.getImgData(note)
+            emit(data)
+        }
+
+        return lst
     }
 }
 

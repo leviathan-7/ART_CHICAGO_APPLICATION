@@ -118,4 +118,10 @@ dependencies {
 
     implementation("androidx.compose.runtime:runtime-livedata:1.6.3")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
+
+    // retrofit
+    implementation ("com.squareup.retrofit2:retrofit:2.6.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.6.0")
+
+    implementation("com.squareup.retrofit2:adapter-rxjava:2.6.0")
 }

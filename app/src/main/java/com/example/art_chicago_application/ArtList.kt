@@ -18,7 +18,7 @@ fun ArtList(modifier: Modifier = Modifier, onNavigateToInf: () -> Unit, onNaviga
             NavBarTop(text = " page = " + listPage, onNavigateToList = onNavigateToList)
         }
 
-        if(notesList != null){
+        if(notesList.value != null){
             items(notesList.value!!) { note ->
                 ArtCard(
                     note = note,
