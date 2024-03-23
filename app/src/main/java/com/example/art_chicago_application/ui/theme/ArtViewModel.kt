@@ -1,4 +1,5 @@
 package com.example.art_chicago_application
+import android.graphics.Bitmap
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
@@ -19,6 +20,14 @@ class ArtViewModel( private val appRepository: AppRepository) : ViewModel() {
     fun GetImgData(note: Note): LiveData<ImgData?>{
         val lst: LiveData<ImgData?> = liveData {
             val data = appRepository.getImgData(note)
+            emit(data)
+        }
+
+        return lst
+    }
+    fun GetImg(id: String): LiveData<Bitmap?>{
+        val lst: LiveData<Bitmap?> = liveData {
+            val data = appRepository.getImg(id)
             emit(data)
         }
 

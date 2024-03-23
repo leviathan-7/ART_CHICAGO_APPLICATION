@@ -9,10 +9,10 @@ import retrofit2.http.Query
 
 
 interface APIService {
-    @GET("api/v1/artworks?fields=id%2Ctitle")
+    @GET("artworks?fields=id%2Ctitle")
     suspend fun loadPage(@Query("page") pageNumber: Int): Page?
 
-    @GET("api/v1/artworks/{id}")
+    @GET("artworks/{id}")
     suspend fun loadPageInf(@Path("id") id: Int): PageInf?
 
 }

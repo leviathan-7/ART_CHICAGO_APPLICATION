@@ -8,6 +8,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -22,18 +23,9 @@ import kotlinx.coroutines.withContext
 @Composable
 fun ImgById(id: String?) {
     if (id != null){
-        val imageURL = "https://www.artic.edu/iiif/2/"+id+"/full/843,/0/default.jpg"
+        val image = artViewModel!!.GetImg(id).observeAsState()
 
-        var image by remember { mutableStateOf<Bitmap?>(null) }
-
-        LaunchedEffect(imageURL) {
-            val bitmap = withContext(Dispatchers.IO) {
-                Picasso.get().load(imageURL).get()
-            }
-            image = bitmap
-        }
-
-        image?.let {
+        image.value?.let {
             Image(bitmap = it.asImageBitmap(), contentDescription = null)
         }
     }else{
@@ -42,6 +34,5 @@ fun ImgById(id: String?) {
             fontSize = 25.sp
         )
     }
-
 }
 
