@@ -11,23 +11,28 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 
 class AppRepository() {
-    private var apiService: APIService? = null
-    init {
-        val retrofit: Retrofit = Retrofit.Builder()
-            .baseUrl("https://api.artic.edu/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-            .build()
-        apiService = retrofit.create(APIService::class.java);
-    }
+    private val hashPages: HashMap<Int, List<Note>?> = HashMap()
+    private val hashNote: HashMap<Int, ImgData?> = HashMap()
 
+    private var apiService = Retrofit.Builder()
+        .baseUrl("https://api.artic.edu/")
+        .addConverterFactory(GsonConverterFactory.create())
+        .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+        .build()
+        .create(APIService::class.java)
 
     suspend fun getNotesFromPage(pageNumber: Int): List<Note>? {
-        return apiService!!.loadPage(pageNumber)!!.data
+        if (!hashPages.containsKey(pageNumber)) {
+            hashPages.put(pageNumber, apiService.loadPage(pageNumber)!!.data)
+        }
+        return hashPages.get(pageNumber)
     }
 
     suspend fun getImgData(note: Note): ImgData? {
-        return apiService!!.loadPageInf(note.id)!!.data
+        if (!hashNote.containsKey(note.id)){
+            hashNote.put(note.id, apiService.loadPageInf(note.id)!!.data)
+        }
+        return hashNote.get(note.id)
     }
 
 }
